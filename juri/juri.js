@@ -89,8 +89,9 @@ angular.module('myApp.juri', ['ngRoute'])
       var timesum =  minutes*60 + seconds;
 
       $scope.$storage.timesum = timesum;
-      $scope.start("pause");
       clock.setTime(timesum);
+      $scope.start("pause");
+      
       console.log(timesum)
     };
 
@@ -109,7 +110,7 @@ angular.module('myApp.juri', ['ngRoute'])
     function updateTime() {
       //console.log($scope.$storage.timesum);
       //clock.setTime($scope.$storage.timesum);
-      $scope.$storage.timesum = clock.getTime().time;
+      $scope.$storage.timesum = clock.getTime().time+1;
     }
 
     $interval(updateTime, 1000);
@@ -238,21 +239,21 @@ angular.module('myApp.juri', ['ngRoute'])
           if( $scope.$storage.category  ==  $scope.params.category){
             
         
-          clock.setTime($scope.$storage.timesum);
+          //clock.setTime($scope.$storage.timesum);
       
-          if($scope.$storage.timesum<=0 && $scope.$storage.tick=="start" ){
+          if($scope.$storage.timesum<=1 && $scope.$storage.tick=="start" ){
            // alert("stop");
-            $scope.$storage.timesum = -1;
+            $scope.$storage.timesum = 0;
             $scope.$storage.tick="pause";
             sound.play();
           }
   
 
-            if($scope.$storage.tick == "pause"){
-              clock.setTime($scope.$storage.timesum+1);
-              }else{
+            //if($scope.$storage.tick == "pause"){
+             // clock.setTime($scope.$storage.timesum+1);
+             // }else{
                 clock.setTime($scope.$storage.timesum);
-              }
+             // }
 
           }
         
