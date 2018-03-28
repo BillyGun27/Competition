@@ -1,0 +1,34 @@
+<table class="table table-hover"  style="width:100%">
+    <tr style="color: rgb(65, 200, 181)">
+    <th>No</th>
+    <th>Category</th>
+    <th>No Peserta</th>
+    <th>Tim</th>
+    <th>anggota1</th>
+    <th>anggota2</th>
+    <th>anggota3</th>
+    <th>asal</th>
+    <th>base</th>
+    </tr>
+    <!--
+    <select name="sa" id="sa">
+        <option value="da">{{peserta.length}}</option>
+        <option value="sa">dada</option>
+    </select>-->
+
+    <tr ng-repeat="x in peserta |filter:searchTim" ng-click="getValue('A',x)">
+    <td>{{$index}}</td>
+    <td>{{x.kategori}}</td> 
+    <td>{{x.NoPeserta}}</td>   
+    <td>{{x.name}}</td>
+    <td>{{x.anggota1}}</td>
+    <td>{{x.anggota2}}</td>
+    <td>{{x.anggota3}}</td>
+    <td>{{x.asal}}</td>
+    
+       <td><select ng-model="base[$index]" ng-init="base[$index] = x.base" ng-options="x for x in choice"></select>
+        <button  ng-click="wait($index)" >Input</button>
+        </td>
+    <tr>
+
+</table>

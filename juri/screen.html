@@ -1,0 +1,113 @@
+<style>
+ 
+        ul{
+          list-style: none;
+    
+          }
+        .Screen{
+          
+          height: 150px;
+          text-transform: uppercase;
+          
+         
+        }
+        .A{
+          background-image: url("dist/img/A.png");
+          background-repeat: no-repeat;
+          background-position: right;
+          background-color: rgb(76.5%, 8.6%, 0%);
+          border-left : 30px solid darkred;
+          border-right : 20px solid darkred;
+          border-bottom : 20px solid white;
+          color: white;
+          /*background-image: url("loginSmall.png");*/
+        }
+        .B{
+          background-image: url("dist/img/B.png");
+          background-repeat: no-repeat;
+          background-position: right;
+          background-color: rgb(0%, 74.9%, 100%);
+          border-left : 30px solid darkblue;
+          border-right : 20px solid darkblue;
+          border-top : 20px solid white;
+          color: black;
+          
+        }
+        .WaitList{
+          height:100%;
+        }
+        .next{
+          background-color: palegreen;  
+        }
+        footer {
+                position:absolute;
+                bottom:0;
+                width:100%;
+                
+            }
+        .time{
+          padding: 5%;
+          zoom: 1;
+          transform:  scale(2);
+          -moz-transform: scale(2);
+          -webkit-transform: scale(2);
+        }
+        #resA ,#resB{
+          font-size: 70px;
+          color: black;
+        }
+
+        .checked{
+          background-color: greenyellow;
+        }
+        </style>
+
+<audio  id="sound">
+  <source src="sound/AirHorn.mp3" type="audio/mpeg">
+  NO SUPPORT
+  </audio>
+    
+<!--
+    <b>Enter name in below input field</b><br/><br/>
+    <input ng-model="$storage.name"/>name-->
+<div class="row">
+      <div class="col-md-10">
+          <div class="row">
+            <div class="col-md-12 Screen A"> 
+              <div class="col-md-10" ng-repeat="x in waiting.A |filter:validator.current "> 
+                <h2>{{x.name}}</h2>
+              </div>
+              <div class="col-md-2"> 
+                 <!-- <h1 id="resA" >Nama tim</h1>-->
+                </div>
+              </div>
+          
+          </div>
+          <div class="row">
+            <div class="col-md-offset-6 col-md-8">
+               <h1> <div class="time"></div></h1>
+            </div>
+          </div>
+      <!--moved to footer<div class="row">
+            <div class="col-md-12 Screen B"> <h2><div id="chaB"></div></h2> </div>
+          </div>-->
+    </div>
+    <div class="col-md-2 WaitList"><h3>Now</h3><div ng-include="'juri/viewwaiting.html'" ></div>  </div>
+</div>
+
+  <footer>
+  
+         <div class="row">
+            <div class="col-md-10 Screen B"> 
+                <div class="col-md-10" ng-repeat="x in waiting.B |filter:validator.current "> 
+                  <h2>{{x.name}}</h2>
+                </div>
+                <div class="col-md-2"> 
+                   <!-- <h1 id="resA" >Nama tim</h1>-->
+                </div>
+              </div>
+                
+      </div>
+      
+      <div id="full" >{{params.category | uppercase }}<img src="dist/img/{{params.category | lowercase }}.png" height="60"  alt="baronas-{{params.category | lowercase }}"> CATEGORY</div>
+        </footer>

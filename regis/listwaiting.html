@@ -1,0 +1,34 @@
+<table class="table table-hover"  style="width:100%">
+        <tr style="color: rgb(65, 200, 181)">
+        <th>Urutan</th>
+        <th></th>
+        <th>Category</th>
+        <th>No Peserta</th>
+        <th>Tim</th>
+        <th>Category</th>
+        <th>No Peserta</th>
+        <th>Tim</th>
+        <th></th>
+        </tr>
+      <!--  <select name="sa" id="sa">
+            <option value="da">{{waiting.length}}</option>
+            <option value="sa">dada</option>
+        </select>
+    -->
+    <form>
+        <tr ng-repeat="x in waiting.peserta.A" ng-class="x.current">
+        <td>{{$index+1}}</td>
+        <td><button type="button" class="btn btn-danger" ng-click="itemDelete(x.id)">X</button></td>
+        <td>{{x.kategori}}</td>
+        <td>{{x.NoPeserta}}</td>
+        <td>{{x.name}}</td>
+        <td>{{waiting.peserta.B[$index].kategori}}</td>
+        <td>{{waiting.peserta.B[$index].NoPeserta}}</td>
+        <td>{{waiting.peserta.B[$index].name}}</td>
+        <td><input type="radio"  ng-model="waiting.checked" ng-change="itemClick(x.id)"  ng-value="x.current"></td>
+        <tr>
+    </form>
+  
+    </table>
+
+  

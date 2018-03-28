@@ -1,0 +1,21 @@
+<div ng-transclude></div>
+{{side.category}}  Search : <input type="text" id="search" ng-model="searchTim" >
+<div id="minibox">
+<div  class="table-responsive">
+<table class="table table-hover"  style="width:100%">
+    <tr style="color: rgb(65, 200, 181)">
+    <th>No</th>
+    <th>No Peserta</th>
+    <th>Tim</th>
+    <th>Asal</th>
+    </tr>
+
+    <tr ng-repeat="x in side.peserta |filter:searchTim" ng-click="itemClick(side.box,x)">
+    <td>{{$index}}</td>
+    <td>{{x.NoPeserta}}</td>   
+    <td>{{x.name}}</td>
+    <tr>
+
+</table>
+</div>
+</div>

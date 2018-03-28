@@ -1,0 +1,75 @@
+<style>
+       
+  #box {
+   height: 400px;
+   overflow: auto;
+   border: 3px solid lawngreen
+  }
+  #minibox {
+   height: 200px;
+   overflow: auto;
+   border: 3px solid lawngreen
+  }
+  .selectbox{
+   background: rgb(236, 236, 236);
+   border: 3px solid green
+  }
+  .checked{
+      background-color: greenyellow;
+  }
+
+  .table-hover tbody tr.selected:hover td {
+   background: palegreen;
+   }
+</style>
+
+<h2>{{name}} {{params.category}} </h2>
+<h4>Klik Tabel untuk memilih tim</h4>
+<!--<input type="text" id="search" ng-model="searchTim" >-->
+<div class="row">
+    <div class="col-md-6 selectbox">
+        <base-selector base="selectorA" call="getValue($base,$info)" >
+        <h3>A SET :{{selected[1].name}}</h3>
+        </base-selector>
+    </div> 
+    <div class="col-md-6 selectbox">
+        <base-selector base="selectorB" call="getValue($base,$info)" >
+        <h3>B SET :{{selected[2].name}}</h3>
+        </base-selector>
+    </div>
+    
+</div>
+<br>
+<div style="display:block;text-align:center">
+    <button type="button" ng-click="ConfirmTeam()" class="btn btn-success">Masukkan Tim</button>
+</div>
+<br>
+<!--
+<div id="box" >
+    <div id="list" ng-include="'regis/listpresent.html'" class="table-responsive"></div>
+</div>  
+jika status peserta tidak berubah setelah input ,tekan input sekali lagi(tidak perlu memilih grup lagi) 
+<h3>Hadir</h3>
+<div>data hadir</div>-->
+<div class="row">
+    <div class="col-md-12">
+        <h4>List Urutan Tampil</h4>
+        <div  id="box" >
+                <wait-list waiting="waiting" call="setNow($id)" del="DeleteNow($id)" class="table-responsive"></wait-list>
+           <!--<div id="checked" ng-include="'regis/checked.html'" class="table-responsive">
+                
+            </div>-->
+        </div> 
+    </div>
+ <!--   <div class="col-md-6">
+        <h4>B</h4>
+        <div  id="box" >
+                <wait-list base="waitingB"  call="setNow($id)" class="table-responsive"></wait-list>
+            \<div id="checked" ng-include="'regis/checked.html'" class="table-responsive">
+                
+            </div>
+        </div> 
+    </div>-->
+</div>
+
+ 

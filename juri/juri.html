@@ -1,0 +1,80 @@
+<style>
+    body{
+       background-color: lawngreen;
+     }
+   .Screen{
+     padding: 6% 5%;
+     text-align: center;
+     font-size: 15px;
+     border: 5px solid white;
+     border-radius: 50px;
+    
+   }
+   .WaitList{
+     padding: 2% 5%;
+     text-align: left;
+     background-color: rgb(67.8%, 100%, 18.4%);
+     height:450px;
+   }
+   #Output{
+       padding: 5%;
+       font-size: 80px;
+   }
+   #box {
+       height: 400px;
+       overflow: auto;
+       background: white;
+      }
+  .checked{
+      background-color: greenyellow;
+  }
+   </style>
+
+<h2>{{name}} {{params.category}} <a class="btn btn-primary" href="#!/screen/{{params.category}}" target="_blank" >Buka Tab Timer Screen</a></h2>
+
+
+
+
+<div class="row">
+    <div class="col-md-offset-2 col-md-8 Screen">
+            <h1><div id="jtitle"></div></h1>
+
+            <!--
+            <b>Enter name in below input field</b><br/><br/>
+            <input ng-model="$storage.name"/>-->
+        <!--   <input type="text" name="hours" id="hours"   size="1" maxlength="2">hour :-->
+        <input type="number" name="minutes" id="minutes"   ng-model="minutes"  max="59">minute :
+        <input type="number" name="seconds" id="seconds"  ng-model="seconds"  max="59">second
+        <!--<h1>{{minutes}}</h1> : <h1>{{seconds}}</h1> 
+        <h2>{{current}}</h2>-->
+        <button type="button" ng-click="toSecs()">SET</button>
+        <button type="button" ng-click="start('start')">START</button>
+        <button type="button" ng-click="start('pause')">PAUSE</button>
+       <div class="col-md-offset-3 col-md-8">
+               <h1> <div class="time"></div></h1>
+        </div>
+       
+        
+    </div>
+</div>
+<div class="row">
+  <div class="col-md-12 WaitList Screen "> 
+    <div id="box">
+      <wait-list waiting="waiting" call="setNow($id)" del="DeleteNow($id)" class="table-responsive"></wait-list>
+    </div>
+    </div> 
+</div>
+
+
+<!--
+<p>Let's try this simple notify service, injected into the controller...</p>
+<input ng-init="message='test'" ng-model="message" >
+<button ng-click="callNotify(message);">NOTIFY</button>
+<p>(you have to click 3 times to see an alert)</p>
+
+
+<p>The input field has changed {{count}} times.</p>
+
+  <h1>{{myValue}}</h1>
+
+-->
