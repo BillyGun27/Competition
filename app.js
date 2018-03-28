@@ -32,9 +32,9 @@ angular.module('myApp', [
     templateUrl: 'regis/listwaiting.html',
     link: function(scope) {
 
-      scope.itemClick = function(id) {
+      scope.itemClick = function(id,cat) {
           //scope.current = value;
-        scope.call({$id: id});
+        scope.call({$id: id,$cat:cat});
       }
 
       scope.itemDelete = function(id) {
@@ -46,12 +46,13 @@ angular.module('myApp', [
 })
 .service('checker', function($http) {
 
-  this.setNow = function(id){//set pause and start
+  this.setNow = function(id,cat){//set pause and start
       
-    //alert(id);
+    alert(cat);
     
     var data = $.param({
-      id : id
+      id : id,
+      cat:cat
       });
   
       var config = {
@@ -61,7 +62,7 @@ angular.module('myApp', [
       }
   
       $http.post('data/wait/current.php', data, config).then(function (response) {
-        //alert(response.data);
+       // alert(response.data);
       });
   }
 

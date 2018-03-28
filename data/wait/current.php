@@ -2,14 +2,15 @@
 include("../connect.php");
 //header('Content-Type: application/json');
 $id = $_POST["id"];
+$cat = $_POST["cat"];
 
 
     
 $DB = new DB();
   //  $DB->query("INSERT INTO waiting_list( NoPeserta,kategori,base,urutan ) VALUES(?,?,?,(SELECT COUNT(NoPeserta) + 1   FROM  (SELECT * FROM waiting_list) wl  WHERE kategori = ? AND  base = ?  ) ) ")
    // ->param( [$NoPeserta ,$kategori ,$base ,$kategori ,$base ] );
-   $DB->query("UPDATE race_list SET current = null ")
-   ->param( [$id ] );
+   $DB->query("SET SQL_SAFE_UPDATES = 0; UPDATE race_list SET current = null WHERE kategori = ?")
+   ->param( [ $cat ] );
 
    $DB->send() ;
 
@@ -17,7 +18,9 @@ $DB = new DB();
     ->param( [$id ] );
 
     if($DB->send()){
-        echo "sucess";
+        echo $cat;
+    }else{
+        echo "error";
     }
 
     

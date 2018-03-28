@@ -21,9 +21,10 @@ angular.module('myApp.juri', ['ngRoute'])
  $scope.params = $routeParams;
 
  $scope.$storage = $localStorage.$default({
-   name:'jakw',
+  name:'jakw',
   tick : 'stop',
   timesum : 0,
+  category:'none'
 });
 
  /* 
@@ -65,7 +66,7 @@ angular.module('myApp.juri', ['ngRoute'])
   /*$scope.$watch('current', function() {
     //alert("hell");
   });*/
-  
+  $scope.$storage.category = $scope.params.category
     $scope.start = function(tick){//set pause and start
       $scope.$storage.tick = tick;
       //alert($scope.$storage.tick);
@@ -90,6 +91,7 @@ angular.module('myApp.juri', ['ngRoute'])
       $scope.$storage.timesum = timesum;
       $scope.start("pause");
       clock.setTime(timesum);
+      console.log(timesum)
     };
 
     $scope.toSecs();
@@ -113,8 +115,8 @@ angular.module('myApp.juri', ['ngRoute'])
     $interval(updateTime, 1000);
 
 //display radio list
-    $scope.setNow = function(id) {
-      checker.setNow(id);
+    $scope.setNow = function(id,cat) {
+      checker.setNow(id,cat);
     };
 
     $scope.DeleteNow = function(id) {
@@ -232,24 +234,29 @@ angular.module('myApp.juri', ['ngRoute'])
         //  clock.setTime( $scope.$storage.curtime);
         }*/
         
-        //console.log("change");
-        //if($scope.$storage.tick == "begin"){
-          clock.setTime($scope.$storage.timesum);
-        //}
-
-          if($scope.$storage.tick == "pause"){
-            clock.setTime($scope.$storage.timesum+1);
-            }else{
-              clock.setTime($scope.$storage.timesum);
-            }
+    
+          if( $scope.$storage.category  ==  $scope.params.category){
+            
         
-        /*
-        if($scope.$storage.timesum<=1 && $scope.$storage.tick=="start" ){
-          //alert("stop");
-          $scope.$storage.timesum = 0;
-          $scope.$storage.tick="pause";
-         // sound.play();
-        }*/
+          clock.setTime($scope.$storage.timesum);
+      
+          if($scope.$storage.timesum<=0 && $scope.$storage.tick=="start" ){
+           // alert("stop");
+            $scope.$storage.timesum = -1;
+            $scope.$storage.tick="pause";
+            sound.play();
+          }
+  
+
+            if($scope.$storage.tick == "pause"){
+              clock.setTime($scope.$storage.timesum+1);
+              }else{
+                clock.setTime($scope.$storage.timesum);
+              }
+
+          }
+        
+      
     });
 /*
     var prev;

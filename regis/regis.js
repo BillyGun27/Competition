@@ -54,8 +54,8 @@ var getData = function() {
 };
 */
 
-$scope.setNow = function(id) {
-  checker.setNow(id);
+$scope.setNow = function(id,cat) {
+  checker.setNow(id,cat);
 };
 
 $scope.DeleteNow = function(id) {

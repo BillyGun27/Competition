@@ -25,7 +25,7 @@
         <td>{{waiting.peserta.B[$index].kategori}}</td>
         <td>{{waiting.peserta.B[$index].NoPeserta}}</td>
         <td>{{waiting.peserta.B[$index].name}}</td>
-        <td><input type="radio"  ng-model="waiting.checked" ng-change="itemClick(x.id)"  ng-value="x.current"></td>
+        <td><input type="radio"  ng-model="waiting.checked" ng-change="itemClick(x.id,x.kategori)"  ng-value="x.current"></td>
         <tr>
     </form>
   
