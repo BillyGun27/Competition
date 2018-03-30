@@ -48,7 +48,7 @@ angular.module('myApp', [
 
   this.setNow = function(id,cat){//set pause and start
       
-    alert(cat);
+  //  alert(cat);
     
     var data = $.param({
       id : id,
