@@ -1,6 +1,18 @@
-<ul>
-        <li ng-repeat="x in waiting.A " ng-class="x.current" style="border-bottom : 5px solid green;">
-            <h5>A | {{x.name}}</h5>
-            <h5>B | {{waiting.B[$index].name}}</h5>
-        </li>
-</ul>
+<div ng-if="params.category != 'Elementary'">
+        <ul>
+                <li ng-repeat="x in waiting.A " ng-class="x.current" style="border-bottom : 5px solid green;">
+                    <h5>A | {{x.name}}</h5>
+                    <h5>B | {{waiting.B[$index].name}}</h5>
+                </li>
+        </ul>
+</div>
+<div ng-if="params.category == 'Elementary'">
+        <ul>
+                <li ng-repeat="x in waiting.A " ng-class="x.current"  ng-if="$even" style="border-bottom : 5px solid green;">
+                    <h5>A | {{x.name}}</h5>
+                    <h5>B | {{waiting.B[$index].name}}</h5>
+                    <h5>C | {{waiting.A[$index+1].name}}</h5>
+                    <h5>D | {{waiting.B[$index+1].name}}</h5>
+                </li>
+        </ul>
+</div>

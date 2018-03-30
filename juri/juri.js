@@ -134,6 +134,7 @@ angular.module('myApp.juri', ['ngRoute'])
     
     var getWaiting = function() {
       $http.get("data/wait/view.php?cat="+$scope.params.category).then(function (response) {
+        $scope.$storage.listpeserta = response.data;
         $scope.waiting = {peserta : response.data, checked : "checked"};
        // $scope.waitingB = response.data.B;
         console.log(response.data);
@@ -143,7 +144,7 @@ angular.module('myApp.juri', ['ngRoute'])
      })
     
      .catch(function(res) {
-       $scope.data = 'Server error';
+       console.log('Server error');
        nextLoad(++errorCount * 2 * loadTime);
      });
     
@@ -178,11 +179,11 @@ angular.module('myApp.juri', ['ngRoute'])
 
 
 }])
-.controller('ScreenCtrl', [ '$scope','$http','$timeout','$routeParams','$localStorage', '$interval' ,function($scope, $http,$timeout,$routeParams,$localStorage,$interval ) {
+.controller('ScreenCtrl', [ '$scope','$http','$timeout','$routeParams','$localStorage', '$interval','$filter' ,function($scope, $http,$timeout,$routeParams,$localStorage,$interval,$filter ) {
   // alert("cda");
   $scope.name = "Screen";
-   $scope.params = $routeParams;
-   $scope.output = localStorage.test;
+  $scope.params = $routeParams;
+  $scope.output = localStorage.test;
 
    var sound = document.getElementById("sound"); 
 
@@ -310,7 +311,7 @@ var Waiting;
 $scope.validator = {current:"checked"}
 var getWaiting = function() {
  $http.get("data/wait/screen.php?cat="+$scope.params.category).then(function (response) {
-   $scope.waiting = response.data
+   $scope.waiting = response.data;
   // $scope.waitingB = response.data.B;
    console.log(response.data);
    
@@ -319,11 +320,30 @@ var getWaiting = function() {
 })
 
 .catch(function(res) {
-  $scope.data = 'Server error';
+
+  $scope.curtemp =   $filter('filter')($scope.$storage.listpeserta.A ,$scope.validator );
+ // console.log($scope.$storage.listpeserta.A);
+  //console.log( $scope.$storage.listpeserta.A.indexOf($scope.curtemp) );
+  //console.log($scope.curtemp[0]);
+  $scope.valA = $filter('limitTo')($scope.$storage.listpeserta.A, 8, $scope.$storage.listpeserta.A.indexOf($scope.curtemp[0]) );
+  $scope.valB = $filter('limitTo')($scope.$storage.listpeserta.B, 8, $scope.$storage.listpeserta.A.indexOf($scope.curtemp[0]) );
+
+  $scope.waiting = {A: $scope.valA ,B:$scope.valB}
+  console.log($scope.waiting );
+  console.log('Server error');
   nextLoad(++errorCount * 2 * loadTime);
+  
+
 });
 
 };
+
+
+//$scope.curtemp =   $filter('filter')($scope.$storage.listpeserta.A ,$scope.validator );
+//console.log($scope.$storage.listpeserta.A);
+//console.log( $scope.$storage.listpeserta.A.indexOf($scope.curtemp[0]) );
+//console.log($scope.curtemp[0].id);
+//var searchResults = filterFilter($scope.$storage.listpeserta,$scope.validator.current );
 
 //function
 var cancelNextLoad = function() {

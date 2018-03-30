@@ -111,12 +111,12 @@ $scope.$on('$destroy', function() {
  cancelNextLoad();
 });
 
-
+$scope.validator = {current:"checked"}
     $scope.ConfirmTeam = function(){//set pause and start
       
-      if($scope.selected[1].NoPeserta == $scope.selected[2].NoPeserta){
-        alert("Tim tidak boleh kembar");
-      }else{
+     // if($scope.selected[1].NoPeserta == $scope.selected[2].NoPeserta){
+    //    alert("Tim tidak boleh kembar");
+   //   }else{
         //alert( $scope.selected[1].NoPeserta+ $scope.selected[2].NoPeserta);
          // use $.param jQuery function to serialize data from JSON 
          var data = $.param({
@@ -133,9 +133,27 @@ $scope.$on('$destroy', function() {
 
           $http.post('data/regis/insert.php', data, config).then(function (response) {
             alert(response.data);
+          })
+          .catch(function(res) {
+
+            $scope.curtemp =   $filter('filter')($scope.$storage.listpeserta.A ,$scope.validator );
+      // console.log($scope.$storage.listpeserta.A);
+       //console.log( $scope.$storage.listpeserta.A.indexOf($scope.curtemp) );
+       //console.log($scope.curtemp[0]);
+       //$scope.valA = $filter('limitTo')($scope.$storage.listpeserta.A, 8, $scope.$storage.listpeserta.A.indexOf($scope.curtemp[0]) );
+       //$scope.valB = $filter('limitTo')($scope.$storage.listpeserta.B, 8, $scope.$storage.listpeserta.A.indexOf($scope.curtemp[0]) );
+       $scope.$storage.listpeserta.A[ $scope.$storage.listpeserta.A.indexOf($scope.curtemp[0]) ].current = null;
+       
+       $scope.curtemp =   $filter('filter')($scope.$storage.listpeserta.A ,  { NoPeserta: $scope.selected[1].NoPeserta } );
+
+       $scope.$storage.listpeserta.A[ $scope.$storage.listpeserta.A.indexOf($scope.curtemp[0]) ].current = "checked";
+            
+          
           });
 
-      }
+      //}
+    
+       console.log($scope.waiting );
 
      
     }

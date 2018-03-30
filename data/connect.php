@@ -17,8 +17,8 @@ class DB
       if(!$this->conn){
         
 
-        $servername =  'protel.mysql.database.azure.com';//"127.0.0.1";//
-        $username = "shareall@protel";//"root";//
+        $servername = 'protel.mysql.database.azure.com';// "127.0.0.1";//
+        $username = //"shareall@protel";//"root";
         $dbname = "baronas";
         $password = "ProyekTelematika1";//"273109";//
 

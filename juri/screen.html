@@ -33,6 +33,29 @@
           color: black;
           
         }
+
+        .C{
+          background-image: url("dist/img/C.png");
+          background-repeat: no-repeat;
+          background-position: right;
+          background-color: rgb(145, 0, 150);
+          border-left : 30px solid rgb(82, 0, 71);
+          border-right : 20px solid rgb(82, 0, 71);
+          border-bottom : 20px solid white;
+          color: white;
+          /*background-image: url("loginSmall.png");*/
+        }
+        .D{
+          background-image: url("dist/img/D.png");
+          background-repeat: no-repeat;
+          background-position: right;
+          background-color: rgb(255, 238, 0);
+          border-left : 30px solid rgb(62, 66, 0);
+          border-right : 20px solid rgb(62, 66, 0);
+          border-top : 20px solid white;
+          color: black;
+          
+        }
         .WaitList{
           height:100%;
         }
@@ -73,13 +96,26 @@
 <div class="row">
       <div class="col-md-10">
           <div class="row">
+            <div ng-if="params.category != 'Elementary'">
             <div class="col-md-12 Screen A"> 
               <div class="col-md-10" ng-repeat="x in waiting.A |filter:validator.current "> 
                 <h2>{{x.name}}</h2>
               </div>
-              <div class="col-md-2"> 
-                 <!-- <h1 id="resA" >Nama tim</h1>-->
-                </div>
+            </div>
+            </div>
+
+
+              <div ng-if="params.category == 'Elementary'">
+                  <div class="col-md-6 Screen A"> 
+                      <div class="col-md-10" ng-repeat="x in waiting.A |filter:validator.current "> 
+                          <h2>{{x.name}}</h2>
+                        </div>
+                  </div>
+                  <div class="col-md-6 Screen C"> 
+                      <div class="col-md-10" ng-repeat="x in waiting.A |filter:validator.current "> 
+                        <h2>{{waiting.A[$index+1].name}}</h2>
+                  </div>
+              </div>
               </div>
           
           </div>
@@ -98,6 +134,7 @@
   <footer>
   
          <div class="row">
+            <div ng-if="params.category != 'Elementary'">
             <div class="col-md-10 Screen B"> 
                 <div class="col-md-10" ng-repeat="x in waiting.B |filter:validator.current "> 
                   <h2>{{x.name}}</h2>
@@ -105,8 +142,28 @@
                 <div class="col-md-2"> 
                    <!-- <h1 id="resA" >Nama tim</h1>-->
                 </div>
-              </div>
-                
+           
+            </div>
+            </div>
+
+            <div ng-if="params.category == 'Elementary'">
+                <div class="col-md-5 Screen B"> 
+                    <div class="col-md-10" ng-repeat="x in waiting.B |filter:validator.current "> 
+                      <h2>{{x.name}}</h2>
+                    </div>
+                </div>
+                <div class="col-md-5 Screen D"> 
+                    <div class="col-md-10" ng-repeat="x in waiting.B |filter:validator.current "> 
+                      <h2>{{waiting.B[$index+1].name}}</h2>
+                    </div>
+                </div>
+                </div>
+              <!--
+              <div class="col-md-10" ng-repeat="x in  $storage.listpeserta.B |filter:validator.current "> 
+                <h2>{{x.name}}</h2>
+              </div>-->
+              
+             
       </div>
       
       <div id="full" >{{params.category | uppercase }}<img src="dist/img/{{params.category | lowercase }}.png" height="60"  alt="baronas-{{params.category | lowercase }}"> CATEGORY</div>

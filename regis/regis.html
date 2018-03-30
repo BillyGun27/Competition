@@ -25,6 +25,11 @@
 
 <h2>{{name}} {{params.category}} </h2>
 <h4>Klik Tabel untuk memilih tim</h4>
+Jika Hanya Satu Tim A dan B masukkan nama tim yang sama 
+<div ng-if="params.category == 'Elementary'">
+Masukkan A & B sebanyak 2 kali untuk A & B  lalu C & D <br>
+A->A | B->B | A->C | B->D
+</div>
 <!--<input type="text" id="search" ng-model="searchTim" >-->
 <div class="row">
     <div class="col-md-6 selectbox">
