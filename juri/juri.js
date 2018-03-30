@@ -8,6 +8,9 @@ angular.module('myApp.juri', ['ngRoute'])
   }).when('/juri/:category', {
     templateUrl: 'juri/juri.html',
     controller: 'JuriCtrl'
+  }).when('/screen', {
+    templateUrl: 'juri/BigScreen.html',
+    controller: 'BigScreenCtrl'
   }).when('/screen/:category', {
     templateUrl: 'juri/screen.html',
     controller: 'ScreenCtrl'
@@ -91,7 +94,7 @@ angular.module('myApp.juri', ['ngRoute'])
       $scope.$storage.timesum = timesum;
       clock.setTime(timesum);
       $scope.start("pause");
-      
+      $scope.$storage.category = $scope.params.category
       console.log(timesum)
     };
 
@@ -309,6 +312,63 @@ var getWaiting = function() {
  $http.get("data/wait/screen.php?cat="+$scope.params.category).then(function (response) {
    $scope.waiting = response.data
   // $scope.waitingB = response.data.B;
+   console.log(response.data);
+   
+  errorCount = 0;
+  nextLoad();
+})
+
+.catch(function(res) {
+  $scope.data = 'Server error';
+  nextLoad(++errorCount * 2 * loadTime);
+});
+
+};
+
+//function
+var cancelNextLoad = function() {
+//$timeout.cancel(loadPromise);
+$timeout.cancel(Waiting);
+};
+
+var nextLoad = function(mill) {
+mill = mill || loadTime;
+
+//Always make sure the last timeout is cleared before starting a new one
+cancelNextLoad();
+//loadPromise = $timeout(getData, mill);
+Waiting = $timeout(getWaiting, mill);
+};
+
+
+//Start polling the data from the server
+getWaiting();
+//getData();
+
+
+
+//Always clear the timeout when the view is destroyed, otherwise it will keep polling and leak memory
+$scope.$on('$destroy', function() {
+cancelNextLoad();
+});
+ 
+ }])
+ .controller('BigScreenCtrl', [ '$scope','$http','$timeout','$routeParams','$localStorage', '$interval' ,function($scope, $http,$timeout,$routeParams,$localStorage,$interval ) {
+ 
+  $scope.name = "Screen";
+
+var loadTime = 4000, //Load the data every second
+errorCount = 0, //Counter for the server errors
+loadPromise; //Pointer to the promise created by the Angular $timout service
+var Waiting;
+
+
+var getWaiting = function() {
+ $http.get("data/wait/bigscreen.php").then(function (response) {
+   $scope.waitingElementary = response.data.Elementary
+   $scope.waitingJunior = response.data.Junior
+   $scope.waitingSenior = response.data.Senior
+   $scope.waitingOpen = response.data.Open
    console.log(response.data);
    
   errorCount = 0;

@@ -1,6 +1,6 @@
 <?php
 include("../connect.php");
-//header('Content-Type: application/json');
+header('Content-Type: application/json');
 
 $cat = $_GET["cat"]." Category";
 //$base = $_GET["base"];
@@ -8,23 +8,21 @@ $cat = $_GET["cat"]." Category";
 
 $DB = new DB();
 $DB->query("
-SELECT race_list.id, race_list.A AS NoPeserta, race_list.kategori, current
-,name
+SELECT race_list.id, race_list.A AS NoPeserta, race_list.kategori, current ,name
 FROM race_list JOIN peserta2018 ON race_list.A = peserta2018.NoPeserta
-WHERE race_list.kategori = ?  AND race_list.id >=(SELECT id FROM race_list WHERE current='checked')
+WHERE race_list.kategori = ?  AND race_list.id >=(SELECT id FROM race_list WHERE current='checked' AND race_list.kategori = ?)
 ORDER BY race_list.id ASC
 LIMIT 5;
-")->param([$cat]);
+")->param([$cat,$cat]);
 $A =$DB->view();
 
 $DB->query("
-SELECT race_list.id, race_list.B AS NoPeserta, race_list.kategori, current
-,name
+SELECT race_list.id, race_list.B AS NoPeserta, race_list.kategori, current ,name
 FROM race_list JOIN peserta2018 ON race_list.B = peserta2018.NoPeserta
-WHERE race_list.kategori = ? AND race_list.id >=(SELECT id FROM race_list WHERE current='checked')
+WHERE race_list.kategori = ? AND race_list.id >=(SELECT id FROM race_list WHERE current='checked'AND race_list.kategori = ?)
 ORDER BY race_list.id ASC
 LIMIT 5;
-")->param([$cat]);
+")->param([$cat,$cat]);
 $B =$DB->view();
 /*
 $DB->query("

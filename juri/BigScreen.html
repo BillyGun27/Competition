@@ -1,0 +1,51 @@
+<style>
+    ul {
+  list-style-type: none;
+}
+        .checked{
+          background-color: greenyellow;
+        }
+        
+        </style>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <h1>Elementary</h1>
+                <ul>
+                        <li ng-repeat="x in waitingElementary.A " ng-class="x.current" style="border-bottom : 5px solid green;">
+                            <h3>A | {{x.name}}</h3>
+                            <h3>B | {{waiting.B[$index].name}}</h3>
+                        </li>
+                </ul>
+        </div>
+        <div class="col-md-3">
+            <h1>Junior</h1>
+                <ul>
+                        <li ng-repeat="x in waitingJunior.A " ng-class="x.current" style="border-bottom : 5px solid green;">
+                            <h3>A | {{x.name}}</h3>
+                            <h3>B | {{waiting.B[$index].name}}</h3>
+                        </li>
+                </ul>
+        </div>
+        <div class="col-md-3">
+                <h1>Senior</h1>
+                <ul>
+                        <li ng-repeat="x in waitingSenior.A " ng-class="x.current" style="border-bottom : 5px solid green;">
+                            <h3>A | {{x.name}}</h3>
+                            <h3>B | {{waiting.B[$index].name}}</h3>
+                        </li>
+                </ul>
+        </div>
+        <div class="col-md-3">
+                <h1>Open</h1>
+                <ul>
+                        <li ng-repeat="x in waitingOpen.A " ng-class="x.current" style="border-bottom : 5px solid green;">
+                            <h3>A | {{x.name}}</h3>
+                            <h3>B | {{waiting.B[$index].name}}</h3>
+                        </li>
+                </ul>
+        </div>
+    </div>
+</div>

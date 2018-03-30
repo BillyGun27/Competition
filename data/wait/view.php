@@ -1,6 +1,6 @@
 <?php
 include("../connect.php");
-//header('Content-Type: application/json');
+header('Content-Type: application/json');
 
 $cat = $_GET["cat"]." Category";
 //$base = $_GET["base"];
